@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+~/.local/bin/spedn compile -c $1 | sed -Ef pyformat.sed

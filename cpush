@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+NUMPUSH=`~/.local/bin/spedn compile -c $1 | sed 's/\ /\n/g' | grep -E 'PUSH' |wc -w`
+NUM16=`~/.local/bin/spedn compile -c $1 | sed 's/\ /\n/g' | grep -v '[A-Z]' | wc -w`
+NUM0=`~/.local/bin/spedn compile -c $1 | sed 's/\ /\n/g' | grep  -E 'RESERVED|NEGATE|FALSE' |wc -w`
+NUM=`~/.local/bin/spedn compile -c $1 | sed 's/\ /\n/g' | wc -w`
+let "NUM016 = $NUM16+$NUM0"
+let "NUMNOPUSH = $NUM-$NUM016-$NUMPUSH"
+echo "Number of all opcodes: $NUM"
+echo "Number of OP_0-16 opcodes $NUM016"
+echo "Number of PUSH opcodes $NUMPUSH"
+echo "Number of no-push opcodes: $NUMNOPUSH"
